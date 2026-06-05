@@ -53,7 +53,7 @@ This is the mobile counterpart to [NOVA](https://github.com/shreyans-gits/voice-
 
 ### Phase 4 — Mobile Exclusives
 - **Wake word** — "Hey ZORO" triggers hands-free from background
-- **WhatsApp messaging** — "Send a WhatsApp to Tani"
+- **WhatsApp messaging** — "Send a WhatsApp to Mom"
 - **OCR via camera** — point at text, ZORO reads and explains it
 - **Clipboard AI** — copy anything, ask ZORO to summarize or translate
 
