@@ -2,6 +2,8 @@ import os
 from dotenv import load_dotenv
 import ast
 
+MEMORY_FILE = "memory.json"
+
 load_dotenv()
 
 USER_NAME = os.getenv("USER_NAME")
