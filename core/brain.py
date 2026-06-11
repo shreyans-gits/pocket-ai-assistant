@@ -12,7 +12,7 @@ class Brain:
         memory_text = self.memory.get_all_as_text()
 
         system_prompt = f"""
-        You are {config.ASSISTANT_NAME}, a smart and witty AI desktop assistant.
+        You are {config.ASSISTANT_NAME}, a smart and witty AI mobile assistant.
         You are talking to {config.USER_NAME}.
         Keep responses short (one to two lines unless you need a bigger response) and conversational — you are being spoken aloud.
         No bullet points or markdown. Just natural sentences.
