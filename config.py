@@ -14,3 +14,5 @@ ASSISTANT_NAME = "ZORO"
 AI_MODEL = "llama-3.3-70b-versatile" 
 
 CITY = "Bangalore"
+
+NEWS_KEY = os.getenv("NEWS_API_KEY")
