@@ -62,7 +62,8 @@ This is the mobile counterpart to [NOVA](https://github.com/shreyans-gits/voice-
 
 ## Status
 
-> 🚧 Currently in development — Phase 1 in progress.
+> ✅ Phase 1 complete.
+> 🚧 Currently in development — Phase 2 in progress.
 
 ---
 
