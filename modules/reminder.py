@@ -8,7 +8,7 @@ class ReminderModule:
             message = message
         )
 
-    def set_notification(self, message : str, minutes : int) -> str:
+    def set_reminder(self, message : str, minutes : int) -> str:
         timer = Timer(
             minutes*60,
             self.notify,
