@@ -174,3 +174,32 @@ class Brain:
         except Exception as e:
             print(f"Extraction Error: {e}")
             return None
+        
+    def extract_time(self, query: str) -> tuple:
+        try:
+            extract_prompt = f"""
+            Extract the time mentioned in this query and return it in strict 24-hour HH:MM format.
+            Return only the time, nothing else, no explanation, no AM/PM label.
+
+            Examples:
+            'set an alarm for 7am' -> '07:00'
+            'wake me up at half past 6 in the evening' -> '18:30'
+            'set an alarm for 9:45 pm' -> '21:45'
+
+            Query: {query}
+            """
+
+            response = self.client.chat.completions.create(
+                model=self.model,
+                messages=[{"role": "user", "content": extract_prompt}],
+                temperature=0,
+                max_tokens=10
+            )
+
+            time_str = response.choices[0].message.content.strip()
+            hour, minute = time_str.split(":")
+            return (int(hour), int(minute))
+
+        except Exception as e:
+            print("Time Extraction Error:", e)
+            return None
