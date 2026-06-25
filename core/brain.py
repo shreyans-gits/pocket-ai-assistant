@@ -43,7 +43,7 @@ class Brain:
         try:
             intent_prompt = f"""
             You are an intent classifier. Classify the following query into exactly one of these intents:
-            WEATHER, NEWS, SYSTEM, SEARCH, WATCH, WIKIPEDIA, NOTE_ADD, NOTE_READ, REMINDER, CONVERSATION
+            WEATHER, NEWS, SYSTEM, SEARCH, WATCH, WIKIPEDIA, NOTE_ADD, NOTE_READ, REMINDER, CALL, SMS, APP_OPEN, ALARM, CONVERSATION
 
             Rules:
             - Reply with just the intent word, nothing else
@@ -75,7 +75,7 @@ class Brain:
             You are an expert multi-intent semantic parsing engine. Your job is to break down a user's mobile assistant query into a structured JSON array of execution steps.
 
             Valid Intent List:
-            WEATHER, NEWS, SYSTEM, SEARCH, WATCH, WIKIPEDIA, NOTE_ADD, NOTE_READ, REMINDER, CONVERSATION
+            WEATHER, NEWS, SYSTEM, SEARCH, WATCH, WIKIPEDIA, NOTE_ADD, NOTE_READ, REMINDER, CALL, SMS, APP_OPEN, ALARM, CONVERSATION
 
             Structural Rules:
             1. Return a raw, clean JSON array of objects. Do not include markdown code blocks, do not wrap in ```json, do not write explanations. Just the raw text array.
@@ -113,6 +113,26 @@ class Brain:
             Query: "what's the capital of france"
             [
             {{"intent": "CONVERSATION", "depends_on": null, "subject": null}}
+            ]
+
+            Query: "call mom"
+            [
+            {{"intent": "CALL", "depends_on": null, "subject": "mom"}}
+            ]
+
+            Query: "text Rohan saying I'll be late"
+            [
+            {{"intent": "SMS", "depends_on": null, "subject": "Rohan: I'll be late"}}
+            ]
+
+            Query: "open instagram"
+            [
+            {{"intent": "APP_OPEN", "depends_on": null, "subject": "instagram"}}
+            ]
+
+            Query: "set an alarm for 7am"
+            [
+            {{"intent": "ALARM", "depends_on": null, "subject": null}}
             ]
 
             Query: {query}
