@@ -7,6 +7,10 @@ from modules.voice_note import VoiceNoteModule
 from modules.reminder import ReminderModule
 from modules.weather import WeatherModule
 from modules.news import NewsModule
+from modules.contacts import ContactsModule
+from modules.sms import SmsModule
+from modules.apps import AppsModule
+from modules.alarm import AlarmModule
 
 import config
 
@@ -20,6 +24,10 @@ def main():
     reminder = ReminderModule()
     weather = WeatherModule()
     news = NewsModule()
+    contacts = ContactsModule()
+    sms = SmsModule()
+    apps = AppsModule()
+    alarm = AlarmModule()
 
     # Intent Handlers
     def handle_weather(item, query, context):
@@ -73,6 +81,34 @@ def main():
 
     def handle_conversation(item, query, context):
         return brain.chat(query)
+    
+    def handle_call(item, query, context):
+        subject = item.get("subject")
+        if not subject:
+            return "Who should I call?"
+        return contacts.call(subject)
+
+    def handle_sms(item, query, context):
+        subject = item.get("subject")
+        if not subject or ":" not in subject:
+            return "Who should I text, and what should it say?"
+        
+        name, message = subject.split(":", 1)
+        return sms.send(name.strip(), message.strip())
+
+    def handle_app_open(item, query, context):
+        subject = item.get("subject")
+        if not subject:
+            return "Which app should I open?"
+        return apps.open_app(subject)
+
+    def handle_alarm(item, query, context):
+        result = brain.extract_time(query)
+        if not result:
+            return "I couldn't understand what time you meant."
+        
+        hour, minute = result
+        return alarm.set_alarm(hour, minute)
 
     INTENT_HANDLERS = {
         "WEATHER": handle_weather,
@@ -84,6 +120,10 @@ def main():
         "NOTE_ADD": handle_note_add,
         "NOTE_READ": handle_note_read,
         "REMINDER": handle_reminder,
+        "CALL": handle_call,
+        "SMS": handle_sms,
+        "APP_OPEN": handle_app_open,
+        "ALARM": handle_alarm,
         "CONVERSATION": handle_conversation
     }
 
